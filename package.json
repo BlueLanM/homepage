@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"author": "LanM",
 	"license": "LGPI-3.0",
-	"repository": "https://github.com/BlueLanM/HomePage",
+	"homepage": "https://github.com/BlueLanM/HomePage",
 	"bugs": "https://github.com/BlueLanM/HomePage/issues",
 	"description": "LanM-homepage",
 	"scripts": {
