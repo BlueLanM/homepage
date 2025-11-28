@@ -60,6 +60,7 @@ gulp.task("assets", function() {
 });
 
 gulp.task("build", gulp.series("clean", "assets", "pug", "css", "js", "html"));
+
 gulp.task("default", gulp.series("build"));
 
 gulp.task("watch", function() {
