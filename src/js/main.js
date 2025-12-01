@@ -869,8 +869,8 @@ function loadIntro() {
 	loadIntro.loaded = true;
 }
 
-function switchPage() {
-	if (switchPage.switched) {
+function switchToMain() {
+	if (switchToMain.switched) {
 		return;
 	}
 	const DOM = {
@@ -904,10 +904,9 @@ function switchPage() {
 	});
 	anime({
 		complete: function() {
-			if (canvas) {
-				cancelAnimationFrame(animationID);
-				canvas.parentElement.removeChild(canvas);
-				canvas = null;
+			// 保存背景画布而不是销毁它
+			if (window.backgroundCanvas) {
+				window.backgroundCanvas.style.display = "none";
 			}
 		},
 		d: DOM.path.getAttribute("pathdata:id"),
@@ -916,7 +915,90 @@ function switchPage() {
 		targets: DOM.path
 	});
 
-	switchPage.switched = true;
+	switchToMain.switched = true;
+	window.currentPage = "main";
+}
+
+function switchToIntro() {
+	if (!switchToMain.switched) {
+		return;
+	}
+
+	const DOM = {
+		intro: $(".content-intro"),
+		path: $(".shape-wrap path"),
+		shape: $("svg.shape")
+	};
+	DOM.shape.style.transformOrigin = "50% 0%";
+
+	// 重新初始化背景动画，确保背景图恢复到初始状态
+	if (window.backgroundCanvas) {
+		window.backgroundCanvas.style.display = "block";
+
+		// 强制重新初始化背景动画
+		setTimeout(() => {
+			if (typeof window.initBackground === "function") {
+				// 重置背景初始化状态
+				window.initBackground.loaded = false;
+				window.initBackground();
+			} else {
+				// 如果没有initBackground函数，至少重新添加一些splat效果
+				if (typeof window.multipleSplats === "function") {
+					window.multipleSplats(parseInt(Math.random() * 15) + 5);
+				}
+			}
+		}, 300);
+	}
+
+	anime({
+		duration: 1100,
+		easing: "easeInOutSine",
+		targets: DOM.intro,
+		translateY: "0vh"
+	});
+
+	anime({
+		scaleY: [
+			{
+				duration: 550,
+				easing: "easeInQuad",
+				value: [1, 1.8]
+			},
+			{
+				duration: 550,
+				easing: "easeOutQuad",
+				value: 0.8
+			}
+		],
+		targets: DOM.shape
+	});
+
+	anime({
+		complete: function() {
+			// 重置状态，允许再次切换到Main页面
+			switchToMain.switched = false;
+			loadAll.loaded = false;
+
+			// 确保背景样式正确重置
+			if (document.querySelector(".content-inner")) {
+				document.querySelector(".content-inner").style.background = "unset";
+			}
+			if (document.querySelector(".shape")) {
+				document.querySelector(".shape").style.fill = "#1e1f21";
+			}
+		},
+		d: "M -44,-50 C -52.71,28.52 15.86,8.186 184,14.69 383.3,22.39 462.5,12.58 638,14 835.5,15.6 987,6.4 1194,13.86 1661,30.68 1652,-36.74 1582,-140.1 1512,-243.5 15.88,-589.5 -44,-50 Z",
+		duration: 1100,
+		easing: "easeOutQuad",
+		targets: DOM.path
+	});
+
+	window.currentPage = "intro";
+}
+
+// 兼容旧的函数名
+function switchPage() {
+	switchToMain();
 }
 
 function loadMain() {
@@ -982,6 +1064,9 @@ window.visibilityChangeEvent = hiddenProperty.replace(
 	/hidden/i,
 	"visibilitychange"
 );
+// 初始化页面状态
+window.currentPage = "intro";
+
 window.addEventListener(visibilityChangeEvent, loadIntro);
 window.addEventListener("DOMContentLoaded", loadIntro);
 
@@ -991,7 +1076,12 @@ enterEl.addEventListener("touchenter", loadAll);
 
 function handleScrollEvent(e) {
 	const deltaY = e.deltaY || e.wheelDelta * -1 || e.detail;
-	if (deltaY > 0) {
+
+	if (window.currentPage === "main" && deltaY < 0) {
+		// 在main页面向上滚动，返回到intro页面
+		switchToIntro();
+	} else if (deltaY > 0 && (!window.currentPage || window.currentPage === "intro")) {
+		// 向下滚动，从intro页面切换到main页面
 		loadAll();
 	}
 }
@@ -1021,10 +1111,14 @@ if (isPhone) {
 			const endy = e.changedTouches[0].pageY;
 
 			const direction = getMoveDirection(startx, starty, endx, endy);
-			if (direction !== DIRECTIONS.UP) {
-				return;
+
+			if (direction === DIRECTIONS.DOWN && (!window.currentPage || window.currentPage === "intro")) {
+				// 向下滑动，从intro页面切换到main页面
+				loadAll();
+			} else if (direction === DIRECTIONS.UP && window.currentPage === "main") {
+				// 向上滑动，从main页面返回到intro页面
+				switchToIntro();
 			}
-			loadAll();
 		},
 		{ passive: true }
 	);

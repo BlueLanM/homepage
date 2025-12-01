@@ -25,6 +25,7 @@ SOFTWARE.
 "use strict";
 
 const canvas = document.getElementById("background");
+window.backgroundCanvas = canvas; // 保存全局引用
 resizeCanvas();
 
 function PointerPrototype() {
@@ -941,6 +942,9 @@ const initBackground = () => {
 	update(true);
 };
 
+// 将函数暴露到全局作用域
+window.initBackground = initBackground;
+
 window.addEventListener(visibilityChangeEvent, initBackground);
 window.addEventListener("DOMContentLoaded", initBackground);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -1209,6 +1213,9 @@ function multipleSplats(amount) {
 	}
 }
 
+// 将函数暴露到全局作用域
+window.multipleSplats = multipleSplats;
+
 function splat(x, y, dx, dy, color) {
 	gl.viewport(0, 0, velocity.width, velocity.height);
 	splatProgram.bind();
@@ -1366,7 +1373,7 @@ function hashCode(s) {
 }
 
 document.addEventListener("mousedown", e => {
-	if (switchPage && switchPage.switched) {
+	if (switchToMain && switchToMain.switched) {
 		return;
 	}
 	const posX = scaleByPixelRatio(e.pageX);
@@ -1377,7 +1384,7 @@ document.addEventListener("mousedown", e => {
 });
 
 document.addEventListener("mousemove", e => {
-	if (switchPage && switchPage.switched) {
+	if (switchToMain && switchToMain.switched) {
 		return;
 	}
 	const pointer = pointers[0];
@@ -1388,14 +1395,14 @@ document.addEventListener("mousemove", e => {
 });
 
 document.addEventListener("mouseup", () => {
-	if (switchPage && switchPage.switched) {
+	if (switchToMain && switchToMain.switched) {
 		return;
 	}
 	updatePointerUpData(pointers[0]);
 });
 
 document.addEventListener("touchstart", e => {
-	if (switchPage && switchPage.switched) {
+	if (switchToMain && switchToMain.switched) {
 		return;
 	}
 	e.preventDefault();
@@ -1411,7 +1418,7 @@ document.addEventListener("touchstart", e => {
 document.addEventListener(
 	"touchmove",
 	e => {
-		if (switchPage && switchPage.switched) {
+		if (switchToMain && switchToMain.switched) {
 			return;
 		}
 		e.preventDefault();
@@ -1428,7 +1435,7 @@ document.addEventListener(
 );
 
 document.addEventListener("touchend", e => {
-	if (switchPage && switchPage.switched) {
+	if (switchToMain && switchToMain.switched) {
 		return;
 	}
 	const touches = e.changedTouches;
