@@ -49,14 +49,14 @@ class GridAnimation {
 		this.setupEventListeners();
 
 		// 移动端性能优化
-		if (isPhone) {
+		if (window.isPhone) {
 			this.optimizeForMobile();
 		}
 
 		this.animate();
 
 		// 在移动设备上延迟创建食物，确保画布大小计算正确
-		if (isPhone) {
+		if (window.isPhone) {
 			setTimeout(() => {
 				this.createSpecialBlock();
 			}, 500);
@@ -118,12 +118,12 @@ class GridAnimation {
 		this.canvas.addEventListener("mouseleave", () => this.handleMouseLeave());
 
 		// 移动端触摸事件处理
-		if (isPhone) {
+		if (window.isPhone) {
 			this.setupTouchEvents();
 		}
 
 		// 监听设备方向变化，重新创建食物
-		if (isPhone && window.orientation !== undefined) {
+		if (window.isPhone && window.orientation !== undefined) {
 			window.addEventListener("orientationchange", () => {
 				setTimeout(() => {
 					this.resizeCanvas();
@@ -468,10 +468,10 @@ class GridAnimation {
 			* this.options.squareSize;
 
 		// 增加边框线宽度，特别是在iOS设备上
-		this.ctx.lineWidth = isPhone ? 1.0 : 0.5;
+		this.ctx.lineWidth = window.isPhone ? 1.0 : 0.5;
 
 		// 为iOS设备优化渲染，避免边框闪烁
-		if (isPhone) {
+		if (window.isPhone) {
 			this.ctx.translate(0.5, 0.5); // 在iOS上对齐像素
 		}
 
@@ -622,7 +622,7 @@ class GridAnimation {
 		}
 
 		// 移动设备上重置坐标变换
-		if (isPhone) {
+		if (window.isPhone) {
 			this.ctx.translate(-0.5, -0.5);
 		}
 
@@ -673,12 +673,12 @@ class GridAnimation {
 
 		// 更新网格位置，为移动设备降低速度以减少闪烁
 		const effectiveSpeed = Math.max(
-			isPhone ? this.options.speed * 0.8 : this.options.speed,
+			window.isPhone ? this.options.speed * 0.8 : this.options.speed,
 			0
 		);
 
 		// 确保移动位置为整数值来避免子像素渲染导致的闪烁
-		const moveAmount = isPhone
+		const moveAmount = window.isPhone
 			? Math.round(effectiveSpeed * 100) / 100
 			: effectiveSpeed;
 
@@ -782,7 +782,7 @@ class GridAnimation {
 		);
 
 		// 移除触摸事件监听器
-		if (isPhone && this.handleTouchStart) {
+		if (window.isPhone && this.handleTouchStart) {
 			this.canvas.removeEventListener("touchstart", this.handleTouchStart);
 			this.canvas.removeEventListener("touchmove", this.handleTouchMoveEvent);
 			this.canvas.removeEventListener("touchend", this.handleTouchEndEvent);
@@ -795,7 +795,7 @@ class GridAnimation {
 		);
 
 		// 移除方向变化监听
-		if (isPhone && window.orientation !== undefined) {
+		if (window.isPhone && window.orientation !== undefined) {
 			window.removeEventListener("orientationchange", () => { /* empty arrow function */ });
 		}
 	}
@@ -823,34 +823,42 @@ window.isPhone
 	);
 
 function getMoveDirection(startx, starty, endx, endy) {
-	if (!isPhone) {
+	if (!window.isPhone) {
 		return;
 	}
 
 	const angx = endx - startx;
 	const angy = endy - starty;
 
-	if (Math.abs(angx) < 2 && Math.abs(angy) < 2) {
-		return DIRECTIONS.UNDIRECTED;
+	// 计算滑动距离
+	const distance = Math.sqrt(angx * angx + angy * angy);
+
+	// 最小滑动距离阈值（像素）
+	const minDistance = 30;
+
+	if (distance < minDistance) {
+		return window.DIRECTIONS.UNDIRECTED;
 	}
 
 	const getAngle = (angx, angy) => (Math.atan2(angy, angx) * 180) / Math.PI;
 
 	const angle = getAngle(angx, angy);
-	if (angle >= -135 && angle <= -45) {
-		return DIRECTIONS.UP;
-	} else if (angle > 45 && angle < 135) {
-		return DIRECTIONS.DOWN;
+
+	// 扩大角度范围，使滑动更容易被识别
+	if (angle >= -150 && angle <= -30) {
+		return window.DIRECTIONS.UP;
+	} else if (angle > 30 && angle < 150) {
+		return window.DIRECTIONS.DOWN;
 	} else if (
-		(angle >= 135 && angle <= 180)
-		|| (angle >= -180 && angle < -135)
+		(angle >= 120 && angle <= 180)
+		|| (angle >= -180 && angle < -120)
 	) {
-		return DIRECTIONS.LEFT;
-	} else if (angle >= -45 && angle <= 45) {
-		return DIRECTIONS.RIGHT;
+		return window.DIRECTIONS.LEFT;
+	} else if (angle >= -60 && angle <= 60) {
+		return window.DIRECTIONS.RIGHT;
 	}
 
-	return DIRECTIONS.UNDIRECTED;
+	return window.DIRECTIONS.UNDIRECTED;
 }
 
 function loadIntro() {
@@ -997,7 +1005,7 @@ function loadMain() {
 			const canvas = document.getElementById("gridCanvas");
 			if (canvas) {
 				const gridAnimation = new GridAnimation(canvas, {
-					borderColor: isPhone
+					borderColor: window.isPhone
 						? "rgba(255, 255, 255, 0.2)"
 						: "rgba(255, 255, 255, 0.1)",
 					direction: "diagonal",
@@ -1016,19 +1024,19 @@ function loadMain() {
 
 					specialHoverColor: "rgba(29, 202, 29, 0.8)",
 
-					speed: isPhone ? 0.03 : 0.05,
+					speed: window.isPhone ? 0.03 : 0.05,
 
-					squareSize: isPhone ? 50 : 40,
+					squareSize: window.isPhone ? 50 : 40,
 
 					// 颜色衰减系数
 					// 移动端特殊配置
-					touchSensitivity: isPhone ? 1.2 : 1.0,
+					touchSensitivity: window.isPhone ? 1.2 : 1.0,
 
 					// 移动端更快的过渡
-					trailDuration: isPhone ? 2000 : 1500,
+					trailDuration: window.isPhone ? 2000 : 1500,
 
-					transitionDuration: isPhone ? 150 : 200, // 触摸灵敏度
-					vibrationEnabled: isPhone // 是否启用震动反馈
+					transitionDuration: window.isPhone ? 150 : 200, // 触摸灵敏度
+					vibrationEnabled: window.isPhone // 是否启用震动反馈
 				});
 				gridAnimation.init();
 			}
@@ -1079,32 +1087,62 @@ document.body.addEventListener("mousewheel", handleScrollEvent, {
 document.body.addEventListener("DOMMouseScroll", handleScrollEvent, {
 	passive: true
 }); // Firefox兼容
-$(".arrowmain").addEventListener("mouseenter", loadAll);
+$(".arrow").addEventListener("mouseenter", loadAll);
 
-if (isPhone) {
+if (window.isPhone) {
+	let touchStartPosition = null;
+	let isCanvasTouch = false;
+
 	document.addEventListener(
 		"touchstart",
 		function(e) {
+			// 检查触摸是否发生在画布上
+			const canvas = document.getElementById("gridCanvas");
+			isCanvasTouch = canvas && e.target === canvas;
+
+			// 如果不是画布触摸，记录起始位置用于页面切换
+			if (!isCanvasTouch) {
+				touchStartPosition = {
+					time: Date.now(),
+					x: e.touches[0].pageX,
+					y: e.touches[0].pageY
+				};
+			}
+
+			// 保持原有的全局变量兼容性
 			window.startx = e.touches[0].pageX;
 			window.starty = e.touches[0].pageY;
 		},
 		{ passive: true }
 	);
+
 	document.addEventListener(
 		"touchend",
 		function(e) {
-			const endx = e.changedTouches[0].pageX;
-			const endy = e.changedTouches[0].pageY;
+			// 只有非画布触摸才处理页面切换
+			if (!isCanvasTouch && touchStartPosition) {
+				const endx = e.changedTouches[0].pageX;
+				const endy = e.changedTouches[0].pageY;
+				const endTime = Date.now();
 
-			const direction = getMoveDirection(window.startx, window.starty, endx, endy);
+				// 检查触摸时长，避免误触发
+				const touchDuration = endTime - touchStartPosition.time;
+				if (touchDuration > 50 && touchDuration < 1000) {
+					const direction = getMoveDirection(touchStartPosition.x, touchStartPosition.y, endx, endy);
 
-			if (direction === DIRECTIONS.DOWN && (!window.currentPage || window.currentPage === "intro")) {
-				// 向下滑动，从intro页面切换到main页面
-				loadAll();
-			} else if (direction === DIRECTIONS.UP && window.currentPage === "main") {
-				// 向上滑动，从main页面返回到intro页面
-				switchToIntro();
+					if (direction === window.DIRECTIONS.DOWN && (!window.currentPage || window.currentPage === "intro")) {
+						// 向下滑动，从intro页面切换到main页面
+						loadAll();
+					} else if (direction === window.DIRECTIONS.UP && window.currentPage === "main") {
+						// 向上滑动，从main页面返回到intro页面
+						switchToIntro();
+					}
+				}
 			}
+
+			// 重置状态
+			touchStartPosition = null;
+			isCanvasTouch = false;
 		},
 		{ passive: true }
 	);
