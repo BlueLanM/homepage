@@ -99,3 +99,56 @@
 		}
 	}
 }
+
+.arrowmain {
+	position: absolute;
+	left: 49.5%;
+	top: 10%;
+	transform-origin: 50% 50%;
+	transform: translate3d(-50%, 0%, 0);
+	&-1 {
+		animation: arrowmain-movement 2s ease-in-out infinite;
+	}
+
+	&-2 {
+		animation: arrowmain-movement 2s 1s ease-in-out infinite;
+	}
+
+	&:before,
+	&:after {
+		background: #fff;
+		content: "";
+		display: block;
+		height: 3px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 13px;
+		box-shadow: 1px 1px 20px 0px #fff;
+	}
+
+	&:before {
+		transform: rotate(135deg) translateX(0%);
+    	transform-origin: top left;
+	}
+
+	&:after {
+		transform: rotate(45deg) translateX(-20%);
+    	transform-origin: top left;
+	}
+}
+
+@keyframes arrowmain-movement {
+	0% {
+		opacity: 0;
+		top: 13%;
+	}
+
+	70% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}

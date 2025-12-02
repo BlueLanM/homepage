@@ -1,5 +1,7 @@
 .content.content-main
 	#card
+		.arrowmain.arrowmain-1
+		.arrowmain.arrowmain-2
 		.card-inner.fade
 			header
 				img(src=`${main.avatar.link}` width=`${main.avatar.width}` height=`${main.avatar.height}` alt="avatar")
@@ -20,5 +22,6 @@
 					a(href=`${third.href}` aria-label=`${third.text}`)
 						i(class=`icon icon-${third.icon}`)
 						span(data-translate=`${third.text}`) #{third.text}
+	
 
 	canvas.grid-background#gridCanvas

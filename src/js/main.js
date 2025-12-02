@@ -1079,7 +1079,7 @@ document.body.addEventListener("mousewheel", handleScrollEvent, {
 document.body.addEventListener("DOMMouseScroll", handleScrollEvent, {
 	passive: true
 }); // Firefox兼容
-$(".arrow").addEventListener("mouseenter", loadAll);
+$(".arrowmain").addEventListener("mouseenter", loadAll);
 
 if (isPhone) {
 	document.addEventListener(
