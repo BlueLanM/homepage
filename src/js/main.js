@@ -1130,11 +1130,11 @@ if (window.isPhone) {
 				if (touchDuration > 50 && touchDuration < 1000) {
 					const direction = getMoveDirection(touchStartPosition.x, touchStartPosition.y, endx, endy);
 
-					if (direction === window.DIRECTIONS.DOWN && (!window.currentPage || window.currentPage === "intro")) {
-						// 向下滑动，从intro页面切换到main页面
+					if (direction === window.DIRECTIONS.UP && (!window.currentPage || window.currentPage === "intro")) {
+						// 向上滑动，从intro页面切换到main页面
 						loadAll();
-					} else if (direction === window.DIRECTIONS.UP && window.currentPage === "main") {
-						// 向上滑动，从main页面返回到intro页面
+					} else if (direction === window.DIRECTIONS.DOWN && window.currentPage === "main") {
+						// 向下滑动，从main页面返回到intro页面
 						switchToIntro();
 					}
 				}
