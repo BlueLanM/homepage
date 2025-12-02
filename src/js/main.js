@@ -1096,7 +1096,7 @@ if (isPhone) {
 			const endx = e.changedTouches[0].pageX;
 			const endy = e.changedTouches[0].pageY;
 
-			const direction = getMoveDirection(startx, starty, endx, endy);
+			const direction = getMoveDirection(window.startx, window.starty, endx, endy);
 
 			if (direction === DIRECTIONS.DOWN && (!window.currentPage || window.currentPage === "intro")) {
 				// 向下滑动，从intro页面切换到main页面
