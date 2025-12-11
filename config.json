@@ -37,8 +37,8 @@
 			},
 			"four": {
 				"href": "https://bluelanm.github.io/roguelike/",
-				"icon": "GitHub",
-				"text": "Github"
+				"icon": "roguelike",
+				"text": "roguelike"
 			}
 		}
 	}
