@@ -26,12 +26,17 @@
 				"text": "Blog"
 			},
 			"second": {
+				"href": "https://github.com/BlueLanM",
+				"icon": "GitHub",
+				"text": "Github"
+			},
+			"third": {
 				"href": "https://bluelanm.github.io/Coin-Game/", 
 				"icon": "coin",
 				"text": "幸运硬币"
 			},
-			"third": {
-				"href": "https://github.com/BlueLanM",
+			"four": {
+				"href": "https://bluelanm.github.io/roguelike/",
 				"icon": "GitHub",
 				"text": "Github"
 			}
