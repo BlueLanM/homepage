@@ -1098,7 +1098,23 @@ if (window.isPhone) {
 		function(e) {
 			// 检查触摸是否发生在画布上
 			const canvas = document.getElementById("gridCanvas");
-			isCanvasTouch = canvas && e.target === canvas;
+
+			// 只有在main页面且触摸目标确实是画布时才认为是画布触摸
+			// 并且需要检查触摸是否在画布的可交互区域内
+			isCanvasTouch = false;
+			if (canvas && window.currentPage === "main" && e.target === canvas) {
+				// 进一步检查：如果用户触摸的是画布边缘区域，仍然允许页面切换
+				const rect = canvas.getBoundingClientRect();
+				const touchX = e.touches[0].clientX - rect.left;
+				const touchY = e.touches[0].clientY - rect.top;
+				const edgeThreshold = 50; // 边缘50px区域仍可用于页面切换
+
+				// 只有触摸在画布中心区域时才认为是画布交互
+				isCanvasTouch = touchX > edgeThreshold
+					&& touchX < rect.width - edgeThreshold
+					&& touchY > edgeThreshold
+					&& touchY < rect.height - edgeThreshold;
+			}
 
 			// 如果不是画布触摸，记录起始位置用于页面切换
 			if (!isCanvasTouch) {
