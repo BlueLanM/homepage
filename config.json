@@ -44,6 +44,11 @@
 				"href": "https://bluelanm.github.io/run-game/",
 				"icon": "run",
 				"text": "躲避游戏"
+			},
+			"six": {
+				"href": "https://bluelanm.github.io/collect-star/",
+				"icon": "star",
+				"text": "收集星星"
 			}
 		}
 	}
