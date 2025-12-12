@@ -39,6 +39,11 @@
 				"href": "https://bluelanm.github.io/roguelike/",
 				"icon": "roguelike",
 				"text": "Roguelike"
+			},
+			"five": {
+				"href": "https://bluelanm.github.io/run-game/",
+				"icon": "run",
+				"text": "躲避游戏"
 			}
 		}
 	}
