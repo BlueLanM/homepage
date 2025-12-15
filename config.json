@@ -54,6 +54,11 @@
 				"href": "https://bluelanm.github.io/Geometry-Dash/",
 				"icon": "block",
 				"text": "几何冲刺"
+			},
+			"eight": {
+				"href": "https://bluelanm.github.io/plane-wars/",
+				"icon": "plane",
+				"text": "飞机大战"
 			}
 		}
 	}
