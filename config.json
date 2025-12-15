@@ -49,6 +49,11 @@
 				"href": "https://bluelanm.github.io/collect-star/",
 				"icon": "star",
 				"text": "收集星星"
+			},
+			"seven": {
+				"href": "https://bluelanm.github.io/Geometry-Dash/",
+				"icon": "block",
+				"text": "几何冲刺"
 			}
 		}
 	}
