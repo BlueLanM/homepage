@@ -8,48 +8,12 @@
 				h1(data-translate="name") #{main.name}
 				h2#signature(data-translate="signature") #{main.signature}
 
-			- const { first, second, third, four, five, six, seven, eight, nine, ten } = main.ul
 			ul
-				li
-					a(href=`${first.href}` aria-label=`${first.text}`)
-						i(class=`icon icon-${first.icon}`)
-						span(data-translate=`${first.text}`) #{first.text}
-				li
-					a(href=`${second.href}` aria-label=`${second.text}`)
-						i(class=`icon icon-${second.icon}`)
-						span(data-translate=`${second.text}`) #{second.text}
-				li
-					a(href=`${third.href}` aria-label=`${third.text}`)
-						i(class=`icon icon-${third.icon}`)
-						span(data-translate=`${third.text}`) #{third.text}
-				li
-					a(href=`${four.href}` aria-label=`${four.text}`)
-						i(class=`icon icon-${four.icon}`)
-						span(data-translate=`${four.text}`) #{four.text}
-				li
-					a(href=`${five.href}` aria-label=`${five.text}`)
-						i(class=`icon icon-${five.icon}`)
-						span(data-translate=`${five.text}`) #{five.text}
-				li
-					a(href=`${six.href}` aria-label=`${six.text}`)
-						i(class=`icon icon-${six.icon}`)
-						span(data-translate=`${six.text}`) #{six.text}
-				li
-					a(href=`${seven.href}` aria-label=`${seven.text}`)
-						i(class=`icon icon-${seven.icon}`)
-						span(data-translate=`${seven.text}`) #{seven.text}
-				li
-					a(href=`${eight.href}` aria-label=`${eight.text}`)
-						i(class=`icon icon-${eight.icon}`)
-						span(data-translate=`${eight.text}`) #{eight.text}
-				li
-					a(href=`${nine.href}` aria-label=`${nine.text}`)
-						i(class=`icon icon-${nine.icon}`)
-						span(data-translate=`${nine.text}`) #{nine.text}
-				li
-					a(href=`${ten.href}` aria-label=`${ten.text}`)
-						i(class=`icon icon-${ten.icon}`)
-						span(data-translate=`${ten.text}`) #{ten.text}
+				each project in main.projects
+					li
+						a(href=`${project.href}` aria-label=`${project.text}`)
+							i(class=`icon icon-${project.icon}`)
+							span(data-translate=`${project.text}`) #{project.text}
 	
 
 	canvas.grid-background#gridCanvas

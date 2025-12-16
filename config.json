@@ -19,57 +19,57 @@
 			"height": "100",
 			"width": "100"
 		},
-		"ul": {
-			"first": {
+		"projects": [
+			{
 				"href": "https://bluelanm.github.io/my-website/",
 				"icon": "blog",
 				"text": "Blog"
 			},
-			"second": {
+			{
 				"href": "https://github.com/BlueLanM",
 				"icon": "GitHub",
 				"text": "Github"
 			},
-			"third": {
+			{
 				"href": "https://bluelanm.github.io/lanm-toy-library/",
-				"icon": "toy",
+				"icon": "Toys",
 				"text": "LanM玩具库"
 			},
-			"four": {
+			{
 				"href": "https://bluelanm.github.io/lanm-component",
-				"icon": "component",
+				"icon": "zujian",
 				"text": "LanM组件库"
 			},
-			"five": {
-				"href": "https://bluelanm.github.io/Coin-Game/", 
+			{
+				"href": "https://bluelanm.github.io/Coin-Game/",
 				"icon": "coin",
 				"text": "幸运硬币"
 			},
-			"six": {
+			{
 				"href": "https://bluelanm.github.io/roguelike/",
-				"icon": "roguelike",
+				"icon": "r",
 				"text": "Roguelike"
 			},
-			"seven": {
+			{
 				"href": "https://bluelanm.github.io/run-game/",
 				"icon": "run",
 				"text": "躲避游戏"
 			},
-			"eight": {
+			{
 				"href": "https://bluelanm.github.io/collect-star/",
 				"icon": "star",
 				"text": "收集星星"
 			},
-			"nine": {
+			{
 				"href": "https://bluelanm.github.io/Geometry-Dash/",
-				"icon": "block",
+				"icon": "weibiaoti--",
 				"text": "几何冲刺"
 			},
-			"ten": {
+			{
 				"href": "https://bluelanm.github.io/plane-wars/",
 				"icon": "plane",
 				"text": "飞机大战"
 			}
-		}
+		]
 	}
 }
