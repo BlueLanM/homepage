@@ -32,12 +32,12 @@
 			},
 			{
 				"href": "https://bluelanm.github.io/lanm-toy-library/",
-				"icon": "Toys",
+				"icon": "toy",
 				"text": "LanM玩具库"
 			},
 			{
-				"href": "https://bluelanm.github.io/lanm-component",
-				"icon": "zujian",
+				"href": "https://bluelanm.github.io/lanm-component/",
+				"icon": "component",
 				"text": "LanM组件库"
 			},
 			{
@@ -47,7 +47,7 @@
 			},
 			{
 				"href": "https://bluelanm.github.io/roguelike/",
-				"icon": "r",
+				"icon": "roguelike",
 				"text": "Roguelike"
 			},
 			{
@@ -62,7 +62,7 @@
 			},
 			{
 				"href": "https://bluelanm.github.io/Geometry-Dash/",
-				"icon": "weibiaoti--",
+				"icon": "block",
 				"text": "几何冲刺"
 			},
 			{
