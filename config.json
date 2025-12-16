@@ -69,6 +69,11 @@
 				"href": "https://bluelanm.github.io/plane-wars/",
 				"icon": "plane",
 				"text": "飞机大战"
+			},
+			{
+				"href": "https://bluelanm.github.io/snake-game/",
+				"icon": "snake",
+				"text": "超级贪吃蛇"
 			}
 		]
 	}
