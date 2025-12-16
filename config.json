@@ -31,31 +31,41 @@
 				"text": "Github"
 			},
 			"third": {
+				"href": "https://bluelanm.github.io/lanm-toy-library/",
+				"icon": "toy",
+				"text": "LanM玩具库"
+			},
+			"four": {
+				"href": "https://bluelanm.github.io/lanm-component",
+				"icon": "component",
+				"text": "LanM组件库"
+			},
+			"five": {
 				"href": "https://bluelanm.github.io/Coin-Game/", 
 				"icon": "coin",
 				"text": "幸运硬币"
 			},
-			"four": {
+			"six": {
 				"href": "https://bluelanm.github.io/roguelike/",
 				"icon": "roguelike",
 				"text": "Roguelike"
 			},
-			"five": {
+			"seven": {
 				"href": "https://bluelanm.github.io/run-game/",
 				"icon": "run",
 				"text": "躲避游戏"
 			},
-			"six": {
+			"eight": {
 				"href": "https://bluelanm.github.io/collect-star/",
 				"icon": "star",
 				"text": "收集星星"
 			},
-			"seven": {
+			"nine": {
 				"href": "https://bluelanm.github.io/Geometry-Dash/",
 				"icon": "block",
 				"text": "几何冲刺"
 			},
-			"eight": {
+			"ten": {
 				"href": "https://bluelanm.github.io/plane-wars/",
 				"icon": "plane",
 				"text": "飞机大战"

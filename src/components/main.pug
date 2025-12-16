@@ -8,7 +8,7 @@
 				h1(data-translate="name") #{main.name}
 				h2#signature(data-translate="signature") #{main.signature}
 
-			- const { first, second, third, four, five, six, seven, eight } = main.ul
+			- const { first, second, third, four, five, six, seven, eight, nine, ten } = main.ul
 			ul
 				li
 					a(href=`${first.href}` aria-label=`${first.text}`)
@@ -42,6 +42,14 @@
 					a(href=`${eight.href}` aria-label=`${eight.text}`)
 						i(class=`icon icon-${eight.icon}`)
 						span(data-translate=`${eight.text}`) #{eight.text}
+				li
+					a(href=`${nine.href}` aria-label=`${nine.text}`)
+						i(class=`icon icon-${nine.icon}`)
+						span(data-translate=`${nine.text}`) #{nine.text}
+				li
+					a(href=`${ten.href}` aria-label=`${ten.text}`)
+						i(class=`icon icon-${ten.icon}`)
+						span(data-translate=`${ten.text}`) #{ten.text}
 	
 
 	canvas.grid-background#gridCanvas
