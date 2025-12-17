@@ -74,6 +74,11 @@
 				"href": "https://bluelanm.github.io/snake-game/",
 				"icon": "snake",
 				"text": "超级贪吃蛇"
+			},
+			{
+				"href": "https://bluelanm.github.io/save-city/",
+				"icon": "snake",
+				"text": "拯救城市"
 			}
 		]
 	}
