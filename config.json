@@ -74,8 +74,8 @@
 			},
 			{
 				"id": "projects",
-				"icon": "blog",
-				"text": "项目",
+				"icon": "personal",
+				"text": "个人博客",
 				"projects": [
 					{
 						"href": "https://bluelanm.github.io/my-website/",
@@ -91,14 +91,7 @@
 						"href": "https://bluelanm.github.io/lanm-component/",
 						"icon": "component",
 						"text": "LanM组件库"
-					}
-				]
-			},
-			{
-				"id": "links",
-				"icon": "GitHub",
-				"text": "链接",
-				"projects": [
+					},
 					{
 						"href": "https://github.com/BlueLanM",
 						"icon": "GitHub",
