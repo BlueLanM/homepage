@@ -888,6 +888,9 @@ function switchToMain() {
 	};
 	DOM.shape.style.transformOrigin = "50% 0%";
 
+	// 禁用 intro 页面的交互
+	DOM.intro.classList.remove("active");
+
 	anime({
 		duration: 1100,
 		easing: "easeInOutSine",
@@ -932,6 +935,17 @@ function switchToIntro() {
 		shape: $("svg.shape")
 	};
 	DOM.shape.style.transformOrigin = "50% 0%";
+
+	// 确保分类页完全隐藏并禁用交互
+	const categoryContent = document.querySelector(".content-category");
+	if (categoryContent) {
+		categoryContent.classList.remove("active");
+		categoryContent.classList.remove("hiding");
+		categoryContent.style.pointerEvents = "none";
+	}
+
+	// 启用 intro 页面的交互
+	DOM.intro.classList.add("active");
 
 	// 立即显示背景画布并重新初始化，确保显示正确的初始效果
 	if (window.backgroundCanvas) {
@@ -1206,6 +1220,9 @@ function showCategoryPage(categoryId) {
 	categoryContent.classList.remove("hiding");
 	categoryCardInner.classList.remove("out");
 
+	// 启用分类页的交互
+	categoryContent.style.pointerEvents = "auto";
+
 	// 设置标题
 	categoryTitle.textContent = category.text;
 
@@ -1236,6 +1253,9 @@ function showCategoryPage(categoryId) {
 function hideCategoryPage() {
 	const categoryContent = document.querySelector(".content-category");
 	const categoryCardInner = document.querySelector(".category-card-inner");
+
+	// 立即禁用分类页的交互，防止在动画期间点击
+	categoryContent.style.pointerEvents = "none";
 
 	// 添加退出动画类
 	categoryCardInner.classList.remove("in");
