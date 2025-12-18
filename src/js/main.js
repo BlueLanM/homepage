@@ -1071,10 +1071,12 @@ enterEl.addEventListener("touchenter", loadAll);
 function handleScrollEvent(e) {
 	const deltaY = e.deltaY || e.wheelDelta * -1 || e.detail;
 
-	if (window.currentPage === "category" && deltaY < 0) {
-		// 在分类页面向上滚动，返回到main页面
-		hideCategoryPage();
-	} else if (window.currentPage === "main" && deltaY < 0) {
+	// 在分类页面时不处理滚动事件
+	if (window.currentPage === "category") {
+		return;
+	}
+
+	if (window.currentPage === "main" && deltaY < 0) {
 		// 在main页面向上滚动，返回到intro页面
 		switchToIntro();
 	} else if (deltaY > 0 && (!window.currentPage || window.currentPage === "intro")) {
@@ -1155,9 +1157,6 @@ if (window.isPhone) {
 					} else if (direction === window.DIRECTIONS.DOWN && window.currentPage === "main") {
 						// 向下滑动，从main页面返回到intro页面
 						switchToIntro();
-					} else if (direction === window.DIRECTIONS.DOWN && window.currentPage === "category") {
-						// 向下滑动，从分类页面返回到main页面
-						switchToMain();
 					}
 				}
 			}
@@ -1208,15 +1207,25 @@ function showCategoryPage(categoryId) {
 
 	// 清空并填充项目列表
 	projectsList.innerHTML = "";
-	category.projects.forEach(project => {
+	category.projects.forEach((project, index) => {
 		const li = document.createElement("li");
+		// 移除初始动画类,稍后会重新添加
+		li.style.opacity = "0";
+		li.style.transform = "translateY(20px)";
 		li.innerHTML = `
-			<a href="${project.href}" aria-label="${project.text}">
+			<a href="${project.href}" aria-label="${project.text}" target="_blank" rel="noopener noreferrer">
 				<i class="icon icon-${project.icon}"></i>
 				<span>${project.text}</span>
 			</a>
 		`;
 		projectsList.appendChild(li);
+
+		// 依次触发淡入动画
+		setTimeout(() => {
+			li.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+			li.style.opacity = "1";
+			li.style.transform = "translateY(0)";
+		}, 400 + index * 50);
 	});
 
 	// 显示分类页面
@@ -1233,6 +1242,17 @@ function showCategoryPage(categoryId) {
 function hideCategoryPage() {
 	const categoryContent = document.querySelector(".content-category");
 	const categoryCardInner = document.querySelector(".category-card-inner");
+	const projectsList = document.querySelector(".category-projects-list");
+
+	// 快速淡出项目列表
+	const listItems = projectsList.querySelectorAll("li");
+	listItems.forEach((item, index) => {
+		setTimeout(() => {
+			item.style.transition = "opacity 0.3s ease-out, transform 0.3s ease-out";
+			item.style.opacity = "0";
+			item.style.transform = "translateY(-10px)";
+		}, index * 20);
+	});
 
 	// 先移除淡入效果
 	categoryCardInner.classList.remove("in");
