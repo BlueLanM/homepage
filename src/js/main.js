@@ -1006,23 +1006,23 @@ function loadMain() {
 			if (canvas) {
 				const gridAnimation = new GridAnimation(canvas, {
 					borderColor: window.isPhone
-						? "rgba(255, 255, 255, 0.2)"
-						: "rgba(255, 255, 255, 0.1)",
+						? "rgba(100, 181, 246, 0.15)"
+						: "rgba(100, 181, 246, 0.08)",
 					direction: "diagonal",
-					hoverFillColor: "rgba(255, 255, 255, 0.8)",
-					hoverShadowColor: "rgba(255, 255, 255, 0.8)",
+					hoverFillColor: "rgba(100, 181, 246, 0.8)",
+					hoverShadowColor: "rgba(100, 181, 246, 0.8)",
 
 					snakeColorDecay: 0.85,
 
 					// 蛇身颜色渐变配置
-					snakeHeadColor: "rgba(255, 255, 255, 0.95)",
+					snakeHeadColor: "rgba(144, 202, 249, 0.95)",
 
-					snakeTailColor: "rgba(218, 231, 255, 0.25)",
+					snakeTailColor: "rgba(100, 181, 246, 0.2)",
 
 					// 移动端更长的痕迹
-					specialBlockColor: "rgba(100, 255, 152, 0.8)",
+					specialBlockColor: "rgba(255, 193, 7, 0.85)",
 
-					specialHoverColor: "rgba(29, 202, 29, 0.8)",
+					specialHoverColor: "rgba(255, 235, 59, 0.9)",
 
 					speed: window.isPhone ? 0.03 : 0.05,
 
@@ -1202,6 +1202,10 @@ function showCategoryPage(categoryId) {
 	const projectsList = document.querySelector(".category-projects-list");
 	const categoryCardInner = document.querySelector(".category-card-inner");
 
+	// 确保从 hiding 状态恢复
+	categoryContent.classList.remove("hiding");
+	categoryCardInner.classList.remove("out");
+
 	// 设置标题
 	categoryTitle.textContent = category.text;
 
@@ -1209,9 +1213,6 @@ function showCategoryPage(categoryId) {
 	projectsList.innerHTML = "";
 	category.projects.forEach((project, index) => {
 		const li = document.createElement("li");
-		// 移除初始动画类,稍后会重新添加
-		li.style.opacity = "0";
-		li.style.transform = "translateY(20px)";
 		li.innerHTML = `
 			<a href="${project.href}" aria-label="${project.text}" target="_blank" rel="noopener noreferrer">
 				<i class="icon icon-${project.icon}"></i>
@@ -1219,49 +1220,35 @@ function showCategoryPage(categoryId) {
 			</a>
 		`;
 		projectsList.appendChild(li);
-
-		// 依次触发淡入动画
-		setTimeout(() => {
-			li.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
-			li.style.opacity = "1";
-			li.style.transform = "translateY(0)";
-		}, 400 + index * 50);
 	});
 
 	// 显示分类页面
 	categoryContent.classList.add("active");
 	window.currentPage = "category";
 
-	// 延迟添加淡入动画
+	// 延迟添加淡入动画，让过渡更优雅
 	setTimeout(() => {
 		categoryCardInner.classList.add("in");
-	}, 100);
+	}, 150);
 }
 
 // 隐藏分类页面并返回main
 function hideCategoryPage() {
 	const categoryContent = document.querySelector(".content-category");
 	const categoryCardInner = document.querySelector(".category-card-inner");
-	const projectsList = document.querySelector(".category-projects-list");
 
-	// 快速淡出项目列表
-	const listItems = projectsList.querySelectorAll("li");
-	listItems.forEach((item, index) => {
-		setTimeout(() => {
-			item.style.transition = "opacity 0.3s ease-out, transform 0.3s ease-out";
-			item.style.opacity = "0";
-			item.style.transform = "translateY(-10px)";
-		}, index * 20);
-	});
-
-	// 先移除淡入效果
+	// 添加退出动画类
 	categoryCardInner.classList.remove("in");
+	categoryCardInner.classList.add("out");
+	categoryContent.classList.add("hiding");
 
 	// 等待动画完成后隐藏页面
 	setTimeout(() => {
 		categoryContent.classList.remove("active");
+		categoryContent.classList.remove("hiding");
+		categoryCardInner.classList.remove("out");
 		window.currentPage = "main";
-	}, 600);
+	}, 800);
 }
 
 // 修改switchToMain函数，确保从分类页返回时正确处理
