@@ -66,11 +66,12 @@ gulp.task("default", gulp.series("build"));
 gulp.task("watch", function() {
 	gulp.watch("./src/components/*.pug", gulp.parallel("pug"));
 	gulp.watch("./src/index.pug", gulp.parallel("pug"));
-	gulp.watch("./src/css/**/*.scss", gulp.parallel(["css"]));
+	gulp.watch("./src/css/**/*.less", gulp.parallel(["css"]));
 	gulp.watch("./src/js/*.js", gulp.parallel(["js"]));
+	gulp.watch("./config.json", gulp.parallel(["pug"]));
 	connect.server({
 		livereload: true,
-		root: "dist",
-		port: 8080
+		port: 8080,
+		root: "dist"
 	});
 });

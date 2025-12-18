@@ -8,12 +8,22 @@
 				h1(data-translate="name") #{main.name}
 				h2#signature(data-translate="signature") #{main.signature}
 
-			ul
-				each project in main.projects
-					li
-						a(href=`${project.href}` aria-label=`${project.text}`)
-							i(class=`icon icon-${project.icon}`)
-							span(data-translate=`${project.text}`) #{project.text}
+			ul.categories-list
+				each category in main.categories
+					li.category-item(data-category=`${category.id}`)
+						a.category-link(href="javascript:void(0)" aria-label=`${category.text}`)
+							i(class=`icon icon-${category.icon}`)
+							span(data-translate=`${category.text}`) #{category.text}
 	
-
 	canvas.grid-background#gridCanvas
+
+.content.content-category
+	#category-card
+		.category-card-inner.fade
+			.category-header
+				button.back-button(aria-label="返回")
+					i.icon.icon-arrow-left
+					span 返回
+				h2.category-title
+			
+			ul.category-projects-list

@@ -1071,7 +1071,10 @@ enterEl.addEventListener("touchenter", loadAll);
 function handleScrollEvent(e) {
 	const deltaY = e.deltaY || e.wheelDelta * -1 || e.detail;
 
-	if (window.currentPage === "main" && deltaY < 0) {
+	if (window.currentPage === "category" && deltaY < 0) {
+		// 在分类页面向上滚动，返回到main页面
+		hideCategoryPage();
+	} else if (window.currentPage === "main" && deltaY < 0) {
 		// 在main页面向上滚动，返回到intro页面
 		switchToIntro();
 	} else if (deltaY > 0 && (!window.currentPage || window.currentPage === "intro")) {
@@ -1152,6 +1155,9 @@ if (window.isPhone) {
 					} else if (direction === window.DIRECTIONS.DOWN && window.currentPage === "main") {
 						// 向下滑动，从main页面返回到intro页面
 						switchToIntro();
+					} else if (direction === window.DIRECTIONS.DOWN && window.currentPage === "category") {
+						// 向下滑动，从分类页面返回到main页面
+						switchToMain();
 					}
 				}
 			}
@@ -1163,3 +1169,102 @@ if (window.isPhone) {
 		{ passive: true }
 	);
 }
+
+// 分类页面相关功能
+// categoryData 已在 scripts.pug 中定义
+
+// 设置分类点击监听
+function setupCategoryListeners() {
+	const categoryItems = document.querySelectorAll(".category-item");
+
+	categoryItems.forEach(item => {
+		const link = item.querySelector(".category-link");
+		link.addEventListener("click", function(e) {
+			e.preventDefault();
+			const categoryId = item.getAttribute("data-category");
+			showCategoryPage(categoryId);
+		});
+	});
+}
+
+// 显示分类页面
+function showCategoryPage(categoryId) {
+	if (!window.categoryData) {
+		return;
+	}
+
+	const category = window.categoryData.find(cat => cat.id === categoryId);
+	if (!category) {
+		return;
+	}
+
+	const categoryContent = document.querySelector(".content-category");
+	const categoryTitle = document.querySelector(".category-title");
+	const projectsList = document.querySelector(".category-projects-list");
+	const categoryCardInner = document.querySelector(".category-card-inner");
+
+	// 设置标题
+	categoryTitle.textContent = category.text;
+
+	// 清空并填充项目列表
+	projectsList.innerHTML = "";
+	category.projects.forEach(project => {
+		const li = document.createElement("li");
+		li.innerHTML = `
+			<a href="${project.href}" aria-label="${project.text}">
+				<i class="icon icon-${project.icon}"></i>
+				<span>${project.text}</span>
+			</a>
+		`;
+		projectsList.appendChild(li);
+	});
+
+	// 显示分类页面
+	categoryContent.classList.add("active");
+	window.currentPage = "category";
+
+	// 延迟添加淡入动画
+	setTimeout(() => {
+		categoryCardInner.classList.add("in");
+	}, 100);
+}
+
+// 隐藏分类页面并返回main
+function hideCategoryPage() {
+	const categoryContent = document.querySelector(".content-category");
+	const categoryCardInner = document.querySelector(".category-card-inner");
+
+	// 先移除淡入效果
+	categoryCardInner.classList.remove("in");
+
+	// 等待动画完成后隐藏页面
+	setTimeout(() => {
+		categoryContent.classList.remove("active");
+		window.currentPage = "main";
+	}, 600);
+}
+
+// 修改switchToMain函数，确保从分类页返回时正确处理
+const originalSwitchToMain = switchToMain;
+window.switchToMain = function() {
+	if (window.currentPage === "category") {
+		hideCategoryPage();
+	} else {
+		originalSwitchToMain();
+	}
+};
+
+// 设置返回按钮监听
+document.addEventListener("DOMContentLoaded", function() {
+	const backButton = document.querySelector(".back-button");
+	if (backButton) {
+		backButton.addEventListener("click", function() {
+			hideCategoryPage();
+		});
+	}
+
+	// 延迟初始化分类监听器
+	setTimeout(() => {
+		setupCategoryListeners();
+	}, 1500);
+});

@@ -19,71 +19,92 @@
 			"height": "100",
 			"width": "100"
 		},
-		"projects": [
+		"categories": [
 			{
-				"href": "https://bluelanm.github.io/my-website/",
+				"id": "games",
+				"icon": "gamepad",
+				"text": "游戏",
+				"projects": [
+					{
+						"href": "https://bluelanm.github.io/christmas/",
+						"icon": "christmas",
+						"text": "圣诞球"
+					},
+					{
+						"href": "https://bluelanm.github.io/Coin-Game/",
+						"icon": "coin",
+						"text": "幸运硬币"
+					},
+					{
+						"href": "https://bluelanm.github.io/roguelike/",
+						"icon": "roguelike",
+						"text": "Roguelike"
+					},
+					{
+						"href": "https://bluelanm.github.io/run-game/",
+						"icon": "run",
+						"text": "躲避游戏"
+					},
+					{
+						"href": "https://bluelanm.github.io/collect-star/",
+						"icon": "star",
+						"text": "收集星星"
+					},
+					{
+						"href": "https://bluelanm.github.io/Geometry-Dash/",
+						"icon": "block",
+						"text": "几何冲刺"
+					},
+					{
+						"href": "https://bluelanm.github.io/plane-wars/",
+						"icon": "plane",
+						"text": "飞机大战"
+					},
+					{
+						"href": "https://bluelanm.github.io/snake-game/",
+						"icon": "snake",
+						"text": "超级贪吃蛇"
+					},
+					{
+						"href": "https://bluelanm.github.io/save-city/",
+						"icon": "save",
+						"text": "拯救城市"
+					}
+				]
+			},
+			{
+				"id": "projects",
 				"icon": "blog",
-				"text": "Blog"
+				"text": "项目",
+				"projects": [
+					{
+						"href": "https://bluelanm.github.io/my-website/",
+						"icon": "blog",
+						"text": "Blog"
+					},
+					{
+						"href": "https://bluelanm.github.io/lanm-toy-library/",
+						"icon": "toy",
+						"text": "LanM玩具库"
+					},
+					{
+						"href": "https://bluelanm.github.io/lanm-component/",
+						"icon": "component",
+						"text": "LanM组件库"
+					}
+				]
 			},
 			{
-				"href": "https://github.com/BlueLanM",
+				"id": "links",
 				"icon": "GitHub",
-				"text": "Github"
-			},
-			{
-				"href": "https://bluelanm.github.io/lanm-toy-library/",
-				"icon": "toy",
-				"text": "LanM玩具库"
-			},
-			{
-				"href": "https://bluelanm.github.io/lanm-component/",
-				"icon": "component",
-				"text": "LanM组件库"
-			},
-			{
-				"href": "https://bluelanm.github.io/christmas/",
-				"icon": "christmas",
-				"text": "圣诞球"
-			},
-			{
-				"href": "https://bluelanm.github.io/Coin-Game/",
-				"icon": "coin",
-				"text": "幸运硬币"
-			},
-			{
-				"href": "https://bluelanm.github.io/roguelike/",
-				"icon": "roguelike",
-				"text": "Roguelike"
-			},
-			{
-				"href": "https://bluelanm.github.io/run-game/",
-				"icon": "run",
-				"text": "躲避游戏"
-			},
-			{
-				"href": "https://bluelanm.github.io/collect-star/",
-				"icon": "star",
-				"text": "收集星星"
-			},
-			{
-				"href": "https://bluelanm.github.io/Geometry-Dash/",
-				"icon": "block",
-				"text": "几何冲刺"
-			},
-			{
-				"href": "https://bluelanm.github.io/plane-wars/",
-				"icon": "plane",
-				"text": "飞机大战"
-			},
-			{
-				"href": "https://bluelanm.github.io/snake-game/",
-				"icon": "snake",
-				"text": "超级贪吃蛇"
-			},
-			{
-				"href": "https://bluelanm.github.io/save-city/",
-				"icon": "save",
-				"text": "拯救城市"
+				"text": "链接",
+				"projects": [
+					{
+						"href": "https://github.com/BlueLanM",
+						"icon": "GitHub",
+						"text": "Github"
+					}
+				]
 			}
 		]
 	}
