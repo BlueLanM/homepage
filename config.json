@@ -21,15 +21,37 @@
 		},
 		"categories": [
 			{
+				"id": "projects",
+				"icon": "personal",
+				"text": "个人博客",
+				"projects": [
+					{
+						"href": "https://bluelanm.github.io/my-website/",
+						"icon": "blog",
+						"text": "LanMのBlog"
+					},
+					{
+						"href": "https://github.com/BlueLanM",
+						"icon": "GitHub",
+						"text": "Github"
+					},
+					{
+						"href": "https://bluelanm.github.io/lanm-toy-library/",
+						"icon": "toy",
+						"text": "LanM玩具库"
+					},
+					{
+						"href": "https://bluelanm.github.io/lanm-component/",
+						"icon": "component",
+						"text": "LanM组件库"
+					}
+				]
+			},
+			{
 				"id": "games",
 				"icon": "gamepad",
 				"text": "游戏",
 				"projects": [
-					{
-						"href": "https://bluelanm.github.io/christmas/",
-						"icon": "christmas",
-						"text": "圣诞球"
-					},
 					{
 						"href": "https://bluelanm.github.io/Coin-Game/",
 						"icon": "coin",
@@ -73,29 +95,14 @@
 				]
 			},
 			{
-				"id": "projects",
-				"icon": "personal",
-				"text": "个人博客",
+				"id": "toy",
+				"icon": "tools",
+				"text": "玩具",
 				"projects": [
 					{
-						"href": "https://bluelanm.github.io/my-website/",
-						"icon": "blog",
-						"text": "Blog"
-					},
-					{
-						"href": "https://bluelanm.github.io/lanm-toy-library/",
-						"icon": "toy",
-						"text": "LanM玩具库"
-					},
-					{
-						"href": "https://bluelanm.github.io/lanm-component/",
-						"icon": "component",
-						"text": "LanM组件库"
-					},
-					{
-						"href": "https://github.com/BlueLanM",
-						"icon": "GitHub",
-						"text": "Github"
+						"href": "https://bluelanm.github.io/christmas/",
+						"icon": "christmas",
+						"text": "圣诞球"
 					}
 				]
 			}
