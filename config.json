@@ -103,6 +103,11 @@
 						"href": "https://bluelanm.github.io/christmas/",
 						"icon": "christmas",
 						"text": "圣诞球"
+					},
+					{
+						"href": "https://bluelanm.github.io/threejs-demo/",
+						"icon": "car",
+						"text": "3D汽车"
 					}
 				]
 			}
