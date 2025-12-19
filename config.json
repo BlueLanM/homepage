@@ -8,7 +8,7 @@
 		"title": "LanM",
 		"subtitle": "Front engineer",
 		"enter": "Next",
-		"supportAuthor": true,
+		"supportAuthor": false,
 		"background": true
 	},
 	"main": {
@@ -29,11 +29,6 @@
 						"href": "https://bluelanm.github.io/my-website/",
 						"icon": "blog",
 						"text": "LanMのBlog"
-					},
-					{
-						"href": "https://github.com/BlueLanM",
-						"icon": "GitHub",
-						"text": "Github"
 					},
 					{
 						"href": "https://bluelanm.github.io/lanm-toy-library/",
