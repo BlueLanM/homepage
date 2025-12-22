@@ -1,25 +1,24 @@
-const gulp = require("gulp");
-const minifycss = require("gulp-clean-css");
-const uglify = require("gulp-uglify");
-const htmlmin = require("gulp-htmlmin");
-const cssnano = require("gulp-cssnano");
-const htmlclean = require("gulp-htmlclean");
-const del = require("del");
-const babel = require("gulp-babel");
-const autoprefixer = require("gulp-autoprefixer");
-const connect = require("gulp-connect");
-const pug = require("gulp-pug");
-const less = require("gulp-less");
+import { task, src, dest, series, watch, parallel } from "gulp";
+import minifycss from "gulp-clean-css";
+import uglify from "gulp-uglify";
+import htmlmin from "gulp-htmlmin";
+import cssnano from "gulp-cssnano";
+import htmlclean from "gulp-htmlclean";
+import del from "del";
+import babel from "gulp-babel";
+import autoprefixer from "gulp-autoprefixer";
+import { server } from "gulp-connect";
+import pug from "gulp-pug";
+import less from "gulp-less";
 
-const config = require("./config.json");
+import config from "./config.json";
 
-gulp.task("clean", function() {
+task("clean", function() {
 	return del(["./dist/css/", "./dist/js/"]);
 });
 
-gulp.task("css", function() {
-	return gulp
-		.src("./src/css/*.less")
+task("css", function() {
+	return src("./src/css/*.less")
 		.pipe(less().on("error", function(err) {
 			console.log(err);
 			this.emit("end");
@@ -27,49 +26,45 @@ gulp.task("css", function() {
 		.pipe(minifycss({ compatibility: "ie8" }))
 		.pipe(autoprefixer({ overrideBrowserslist: ["last 2 version"] }))
 		.pipe(cssnano({ reduceIdents: false }))
-		.pipe(gulp.dest("./dist/css"));
+		.pipe(dest("./dist/css"));
 });
 
-gulp.task("html", function() {
-	return gulp
-		.src("./dist/index.html")
+task("html", function() {
+	return src("./dist/index.html")
 		.pipe(htmlclean())
 		.pipe(htmlmin())
-		.pipe(gulp.dest("./dist"));
+		.pipe(dest("./dist"));
 });
 
-gulp.task("js", function() {
-	return gulp
-		.src("./src/js/*.js")
+task("js", function() {
+	return src("./src/js/*.js")
 		.pipe(babel({ presets: ["@babel/preset-env"] }))
 		.pipe(uglify())
-		.pipe(gulp.dest("./dist/js"));
+		.pipe(dest("./dist/js"));
 });
 
-gulp.task("pug", function() {
-	return gulp
-		.src("./src/index.pug")
+task("pug", function() {
+	return src("./src/index.pug")
 		.pipe(pug({ data: config }))
-		.pipe(gulp.dest("./dist"));
+		.pipe(dest("./dist"));
 });
 
-gulp.task("assets", function() {
-	return gulp
-		.src(["./src/assets/**/*"])
-		.pipe(gulp.dest("./dist/assets"));
+task("assets", function() {
+	return src(["./src/assets/**/*"])
+		.pipe(dest("./dist/assets"));
 });
 
-gulp.task("build", gulp.series("clean", "assets", "pug", "css", "js", "html"));
+task("build", series("clean", "assets", "pug", "css", "js", "html"));
 
-gulp.task("default", gulp.series("build"));
+task("default", series("build"));
 
-gulp.task("watch", function() {
-	gulp.watch("./src/components/*.pug", gulp.parallel("pug"));
-	gulp.watch("./src/index.pug", gulp.parallel("pug"));
-	gulp.watch("./src/css/**/*.less", gulp.parallel(["css"]));
-	gulp.watch("./src/js/*.js", gulp.parallel(["js"]));
-	gulp.watch("./config.json", gulp.parallel(["pug"]));
-	connect.server({
+task("watch", function() {
+	watch("./src/components/*.pug", parallel("pug"));
+	watch("./src/index.pug", parallel("pug"));
+	watch("./src/css/**/*.less", parallel(["css"]));
+	watch("./src/js/*.js", parallel(["js"]));
+	watch("./config.json", parallel(["pug"]));
+	server({
 		livereload: true,
 		port: 8080,
 		root: "dist"

@@ -1228,7 +1228,7 @@ function showCategoryPage(categoryId) {
 
 	// 清空并填充项目列表
 	projectsList.innerHTML = "";
-	category.projects.forEach((project, index) => {
+	category.projects.forEach((project) => {
 		const li = document.createElement("li");
 		li.innerHTML = `
 			<a href="${project.href}" aria-label="${project.text}" target="_blank" rel="noopener noreferrer">

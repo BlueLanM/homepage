@@ -103,6 +103,11 @@
 						"href": "https://bluelanm.github.io/threejs-demo/",
 						"icon": "car",
 						"text": "3D汽车"
+					},
+					{
+						"href": "https://bluelanm.github.io/quantum-entanglement/",
+						"icon": "cool",
+						"text": "量子纠缠"
 					}
 				]
 			}
