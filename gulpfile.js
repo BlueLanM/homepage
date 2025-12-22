@@ -1,4 +1,4 @@
-import { task, src, dest, series, watch, parallel } from "gulp";
+import gulp from "gulp";
 import minifycss from "gulp-clean-css";
 import uglify from "gulp-uglify";
 import htmlmin from "gulp-htmlmin";
@@ -11,7 +11,9 @@ import { server } from "gulp-connect";
 import pug from "gulp-pug";
 import less from "gulp-less";
 
-import config from "./config.json";
+import { readFileSync } from "fs";
+const config = JSON.parse(readFileSync(new URL("./config.json", import.meta.url)));
+const { task, src, dest, series, watch, parallel } = gulp;
 
 task("clean", function() {
 	return del(["./dist/css/", "./dist/js/"]);

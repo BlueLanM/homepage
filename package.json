@@ -1,5 +1,6 @@
 {
 	"name": "lanm-homepage",
+	"type": "module",
 	"version": "1.0.0",
 	"author": "LanM",
 	"license": "LGPI-3.0",
