@@ -86,6 +86,11 @@
 						"href": "https://bluelanm.github.io/save-city/",
 						"icon": "save",
 						"text": "拯救城市"
+					},
+					{
+						"href": "https://bluelanm.github.io/PokeLanM/",
+						"icon": "pokemon",
+						"text": "宝可梦游戏"
 					}
 				]
 			},
@@ -120,11 +125,6 @@
 						"href": "https://bluelanm.github.io/fake-mock-api/",
 						"icon": "api",
 						"text": "模拟API"
-					},
-					{
-						"href": "https://bluelanm.github.io/PokeLanM/",
-						"icon": "pokemon",
-						"text": "宝可梦游戏"
 					}
 				]
 			}
