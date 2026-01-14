@@ -8,7 +8,7 @@
 		"title": "LanM",
 		"subtitle": "Front engineer",
 		"enter": "Next",
-		"supportAuthor": false,
+		"supportAuthor": true,
 		"background": true
 	},
 	"main": {
