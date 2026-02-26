@@ -118,6 +118,11 @@
 						"href": "https://bluelanm.github.io/photo-wall/",
 						"icon": "photo",
 						"text": "照片墙"
+					},
+					{
+						"href": "https://bluelanm.github.io/travel-map/",
+						"icon": "map",
+						"text": "旅行地图"
 					}
 				]
 			},
